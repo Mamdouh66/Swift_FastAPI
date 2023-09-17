@@ -23,6 +23,7 @@
 		B42B80532AB752DC00FE5A32 /* LoginViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42B80522AB752DC00FE5A32 /* LoginViewViewModel.swift */; };
 		B42B80552AB752EC00FE5A32 /* RegisterViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42B80542AB752EC00FE5A32 /* RegisterViewViewModel.swift */; };
 		B42B80572AB752FD00FE5A32 /* ToDoListViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42B80562AB752FD00FE5A32 /* ToDoListViewViewModel.swift */; };
+		B42B80592AB7593F00FE5A32 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42B80582AB7593F00FE5A32 /* HeaderView.swift */; };
 		B4A0AF7E2AB73B44008D0EFE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4A0AF7D2AB73B44008D0EFE /* Assets.xcassets */; };
 		B4A0AF822AB73B44008D0EFE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4A0AF812AB73B44008D0EFE /* Preview Assets.xcassets */; };
 		B4A0AFA62AB743D8008D0EFE /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B4A0AFA52AB743D8008D0EFE /* FirebaseAuth */; };
@@ -69,6 +70,7 @@
 		B42B80522AB752DC00FE5A32 /* LoginViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewViewModel.swift; sourceTree = "<group>"; };
 		B42B80542AB752EC00FE5A32 /* RegisterViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewViewModel.swift; sourceTree = "<group>"; };
 		B42B80562AB752FD00FE5A32 /* ToDoListViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListViewViewModel.swift; sourceTree = "<group>"; };
+		B42B80582AB7593F00FE5A32 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		B4A0AF762AB73B42008D0EFE /* ToDoList-FastAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ToDoList-FastAPI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4A0AF792AB73B42008D0EFE /* ToDoList_FastAPIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoList_FastAPIApp.swift; sourceTree = "<group>"; };
 		B4A0AF7B2AB73B42008D0EFE /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				B42B80402AB7519200FE5A32 /* LoginView.swift */,
 				B42B80422AB7519C00FE5A32 /* RegisterView.swift */,
 				B42B80442AB751D800FE5A32 /* ToDoListView.swift */,
+				B42B80582AB7593F00FE5A32 /* HeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -355,6 +358,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B42B80412AB7519200FE5A32 /* LoginView.swift in Sources */,
+				B42B80592AB7593F00FE5A32 /* HeaderView.swift in Sources */,
 				B42B803D2AB7515F00FE5A32 /* ToDoListItemView.swift in Sources */,
 				B42B80552AB752EC00FE5A32 /* RegisterViewViewModel.swift in Sources */,
 				B42B804B2AB7528400FE5A32 /* MainViewViewModel.swift in Sources */,
