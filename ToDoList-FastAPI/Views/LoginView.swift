@@ -18,9 +18,29 @@ struct LoginView: View {
             HeaderView()
             
             // Login Form
-
+            Form {
+                TextField("Email Address", text: $email)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                SecureField("Password", text: $password)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                
+                Button {
+                    // attempt log in
+                    
+                } label: { // how do we want our button to look like
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10)
+                            .foregroundColor(Color.blue)
+                        
+                        Text("Log In")
+                            .foregroundColor(Color.white)
+                            .bold()
+                    }
+                }
+            }
             
             // Create Account
+            
             
             Spacer()
         }
