@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B405A6E62ABC70DA00C5844E /* TLButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B405A6E52ABC70DA00C5844E /* TLButton.swift */; };
 		B42B80392AB7501500FE5A32 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B42B80382AB7501500FE5A32 /* GoogleService-Info.plist */; };
 		B42B803B2AB7512B00FE5A32 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42B803A2AB7512B00FE5A32 /* ProfileView.swift */; };
 		B42B803D2AB7515F00FE5A32 /* ToDoListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42B803C2AB7515F00FE5A32 /* ToDoListItemView.swift */; };
@@ -54,6 +55,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B405A6E52ABC70DA00C5844E /* TLButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLButton.swift; sourceTree = "<group>"; };
 		B42B80382AB7501500FE5A32 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B42B803A2AB7512B00FE5A32 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		B42B803C2AB7515F00FE5A32 /* ToDoListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListItemView.swift; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 				B42B80422AB7519C00FE5A32 /* RegisterView.swift */,
 				B42B80442AB751D800FE5A32 /* ToDoListView.swift */,
 				B42B80582AB7593F00FE5A32 /* HeaderView.swift */,
+				B405A6E52ABC70DA00C5844E /* TLButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -364,6 +367,7 @@
 				B42B804B2AB7528400FE5A32 /* MainViewViewModel.swift in Sources */,
 				B42B80452AB751D800FE5A32 /* ToDoListView.swift in Sources */,
 				B4A0AFB02AB74A8B008D0EFE /* MainView.swift in Sources */,
+				B405A6E62ABC70DA00C5844E /* TLButton.swift in Sources */,
 				B42B804D2AB7528D00FE5A32 /* ProfileViewViewModel.swift in Sources */,
 				B42B80432AB7519C00FE5A32 /* RegisterView.swift in Sources */,
 				B42B80472AB7521E00FE5A32 /* User.swift in Sources */,
