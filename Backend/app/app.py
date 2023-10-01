@@ -3,6 +3,6 @@ from .schemas import TodoBase
 
 app = FastAPI()
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
+@app.get("/todo", tags=["todo"])
+async def get_todos():
+    ...
