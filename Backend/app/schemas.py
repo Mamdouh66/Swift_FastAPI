@@ -3,7 +3,7 @@ from pydantic import BaseModel
 
 class TodoBase(BaseModel):
     title: str
-    done: bool
+    done: bool = False
     description: str | None = None
 
 
