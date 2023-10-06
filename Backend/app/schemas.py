@@ -7,6 +7,14 @@ class TodoBase(BaseModel):
     description: str | None = None
 
 
-class Todo(TodoBase):
+class TodoCreate(TodoBase):
+    pass
+
+
+class TodoResponse(BaseModel):
+    title: str
+    done: bool
+    description: str
+
     class config:
         orm_mode = True
