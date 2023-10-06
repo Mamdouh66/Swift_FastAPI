@@ -46,3 +46,18 @@ def create_todo(request: schemas.Todo, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(new_todo)
     return {"status": status.HTTP_201_CREATED, "data": new_todo}
+
+
+@app.delete("/todos/{id}", tags=["todo"])
+def delete_todo(id: int, db: Session = Depends(get_db)):
+    todo = db.query(models.Todo).filter(models.Todo.id == id)
+
+    if todo.first() == None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail=f"Todo with id {id} not found"
+        )
+
+    todo.delete(synchronize_session=False)
+    db.commit()
+
+    return {"status": status.HTTP_200_OK, "data": f"Deleted todo with id {id}"}
