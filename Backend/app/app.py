@@ -61,3 +61,18 @@ def delete_todo(id: int, db: Session = Depends(get_db)):
     db.commit()
 
     return {"status": status.HTTP_200_OK, "data": f"Deleted todo with id {id}"}
+
+
+@app.put("/todos/{id}", tags=["todo"])
+def update_todo(id: int, request: schemas.Todo, db: Session = Depends(get_db)):
+    new_todo = db.query(models.Todo).filter(models.Todo.id == id)
+
+    if new_todo.first() == None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail=f"Todo with id {id} not found"
+        )
+
+    new_todo.update(request.model_dump())
+    db.commit()
+
+    return {"status": status.HTTP_200_OK, "data": f"Updated todo with id {id}"}
