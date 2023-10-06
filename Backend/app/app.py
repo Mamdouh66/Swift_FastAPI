@@ -1,5 +1,3 @@
-import psycopg2
-
 from fastapi import FastAPI, Depends, status, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
