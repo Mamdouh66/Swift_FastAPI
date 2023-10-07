@@ -4,12 +4,14 @@ from typing import List
 from .. import models, schemas
 from ..database import engine, get_db
 
-router = APIRouter()
+router = APIRouter(
+    prefix="/todos",
+    tags=["todo"],
+)
 
 
 @router.get(
-    "/todos",
-    tags=["todo"],
+    path="/",
     status_code=status.HTTP_200_OK,
     response_model=List[schemas.TodoResponse],
 )
@@ -23,8 +25,7 @@ def get_all(db: Session = Depends(get_db)):
 
 
 @router.get(
-    "/todos/{id}",
-    tags=["todo"],
+    path="/{id}",
     status_code=status.HTTP_200_OK,
     response_model=schemas.TodoResponse,
 )
@@ -38,8 +39,7 @@ def get_one(id: int, db: Session = Depends(get_db)):
 
 
 @router.post(
-    "/todos",
-    tags=["todo"],
+    path="/",
     response_model=schemas.TodoResponse,
     status_code=status.HTTP_201_CREATED,
 )
@@ -52,8 +52,7 @@ def create_todo(request: schemas.TodoResponse, db: Session = Depends(get_db)):
 
 
 @router.delete(
-    "/todos/{id}",
-    tags=["todo"],
+    path="/{id}",
     status_code=status.HTTP_200_OK,
     response_model=schemas.TodoResponse,
 )
@@ -72,8 +71,7 @@ def delete_todo(id: int, db: Session = Depends(get_db)):
 
 
 @router.put(
-    "/todos/{id}",
-    tags=["todo"],
+    path="/{id}",
     status_code=status.HTTP_200_OK,
     response_model=schemas.TodoResponse,
 )

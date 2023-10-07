@@ -25,10 +25,6 @@ class UserBase(BaseModel):
     password: str
 
 
-class UserCreate(UserBase):
-    pass
-
-
 # NOTE don't return password
 class UserResponse(BaseModel):
     email: EmailStr
@@ -37,3 +33,8 @@ class UserResponse(BaseModel):
 
     class config:
         orm_mode = True
+
+
+class UserLogin(BaseModel):
+    email: EmailStr
+    password: str
