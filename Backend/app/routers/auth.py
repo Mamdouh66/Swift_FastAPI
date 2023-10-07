@@ -22,13 +22,13 @@ def login(
 
     if not user:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
+            status_code=status.HTTP_403_FORBIDDEN,
             detail=f"Invalid credentials",
         )
 
     if not hashing.Hash.verify(user.password, request.password):
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
+            status_code=status.HTTP_403_FORBIDDEN,
             detail=f"Invalid credentials",
         )
 
