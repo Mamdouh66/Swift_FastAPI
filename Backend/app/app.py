@@ -93,3 +93,17 @@ def update_todo(id: int, request: schemas.TodoCreate, db: Session = Depends(get_
     db.commit()
 
     return new_todo.first()
+
+
+@app.post(
+    path="/users",
+    tags=["user"],
+    status_code=status.HTTP_201_CREATED,
+    response_model=schemas.UserResponse,
+)
+def create_user(request: schemas.UserCreate, db: Session = Depends(get_db)):
+    new_user = models.User(**request.model_dump())
+    db.add(new_user)
+    db.commit()
+    db.refresh(new_user)
+    return new_user

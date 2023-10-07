@@ -1,4 +1,5 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
+from datetime import datetime
 
 
 class TodoBase(BaseModel):
@@ -11,10 +12,26 @@ class TodoCreate(TodoBase):
     pass
 
 
-class TodoResponse(BaseModel):
-    title: str
-    done: bool
-    description: str
+class TodoResponse(TodoBase):
+    id: int
+    created_at: datetime
+
+    class config:
+        orm_mode = True
+
+
+class UserBase(BaseModel):
+    email: EmailStr
+    password: str
+
+
+class UserCreate(UserBase):
+    pass
+
+
+class UserResponse(UserBase):
+    id: int
+    created_at: datetime
 
     class config:
         orm_mode = True
