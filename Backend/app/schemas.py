@@ -29,7 +29,9 @@ class UserCreate(UserBase):
     pass
 
 
-class UserResponse(UserBase):
+# NOTE don't return password
+class UserResponse(BaseModel):
+    email: EmailStr
     id: int
     created_at: datetime
 

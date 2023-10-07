@@ -4,7 +4,7 @@ from typing import List
 
 from .database import engine, get_db
 
-from . import models, schemas
+from . import models, schemas, hashing
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -102,6 +102,7 @@ def update_todo(id: int, request: schemas.TodoCreate, db: Session = Depends(get_
     response_model=schemas.UserResponse,
 )
 def create_user(request: schemas.UserCreate, db: Session = Depends(get_db)):
+    request.password = hashing.Hash.bcrypt(request.password)
     new_user = models.User(**request.model_dump())
     db.add(new_user)
     db.commit()
