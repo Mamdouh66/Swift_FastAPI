@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, status, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
-from .. import models, schemas
+from .. import models, schemas, oauth2
 from ..database import engine, get_db
 
 router = APIRouter(
@@ -40,10 +40,14 @@ def get_one(id: int, db: Session = Depends(get_db)):
 
 @router.post(
     path="/",
-    response_model=schemas.TodoResponse,
+    response_model=schemas.TodoCreate,
     status_code=status.HTTP_201_CREATED,
 )
-def create_todo(request: schemas.TodoResponse, db: Session = Depends(get_db)):
+def create_todo(
+    request: schemas.TodoBase,
+    db: Session = Depends(get_db),
+    user_id: int = Depends(oauth2.get_current_user),
+):
     new_todo = models.Todo(**request.model_dump())
     db.add(new_todo)
     db.commit()
@@ -54,9 +58,12 @@ def create_todo(request: schemas.TodoResponse, db: Session = Depends(get_db)):
 @router.delete(
     path="/{id}",
     status_code=status.HTTP_200_OK,
-    response_model=schemas.TodoResponse,
 )
-def delete_todo(id: int, db: Session = Depends(get_db)):
+def delete_todo(
+    id: int,
+    db: Session = Depends(get_db),
+    user_id: int = Depends(oauth2.get_current_user),
+):
     todo = db.query(models.Todo).filter(models.Todo.id == id)
 
     if todo.first() == None:
@@ -67,7 +74,7 @@ def delete_todo(id: int, db: Session = Depends(get_db)):
     todo.delete(synchronize_session=False)
     db.commit()
 
-    return f"Deleted todo with id {id}"
+    return {"Data": f"Deleted todo with id {id}"}
 
 
 @router.put(
@@ -75,7 +82,12 @@ def delete_todo(id: int, db: Session = Depends(get_db)):
     status_code=status.HTTP_200_OK,
     response_model=schemas.TodoResponse,
 )
-def update_todo(id: int, request: schemas.TodoCreate, db: Session = Depends(get_db)):
+def update_todo(
+    id: int,
+    request: schemas.TodoCreate,
+    db: Session = Depends(get_db),
+    user_id: int = Depends(oauth2.get_current_user),
+):
     new_todo = db.query(models.Todo).filter(models.Todo.id == id)
 
     if new_todo.first() == None:
