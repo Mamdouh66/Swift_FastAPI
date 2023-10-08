@@ -12,6 +12,7 @@ class Todo(Base):
     description = Column(
         String,
         nullable=False,
+        server_default="",
     )
     done = Column(Boolean, server_default="FALSE", nullable=False)
     created_at = Column(

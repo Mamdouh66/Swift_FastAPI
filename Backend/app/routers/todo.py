@@ -46,7 +46,7 @@ def get_one(id: int, db: Session = Depends(get_db)):
 def create_todo(
     request: schemas.TodoBase,
     db: Session = Depends(get_db),
-    user_id: int = Depends(oauth2.get_current_user),
+    current_user: int = Depends(oauth2.get_current_user),
 ):
     new_todo = models.Todo(**request.model_dump())
     db.add(new_todo)
@@ -62,7 +62,7 @@ def create_todo(
 def delete_todo(
     id: int,
     db: Session = Depends(get_db),
-    user_id: int = Depends(oauth2.get_current_user),
+    current_user: int = Depends(oauth2.get_current_user),
 ):
     todo = db.query(models.Todo).filter(models.Todo.id == id)
 
@@ -86,7 +86,7 @@ def update_todo(
     id: int,
     request: schemas.TodoCreate,
     db: Session = Depends(get_db),
-    user_id: int = Depends(oauth2.get_current_user),
+    current_user: int = Depends(oauth2.get_current_user),
 ):
     new_todo = db.query(models.Todo).filter(models.Todo.id == id)
 
