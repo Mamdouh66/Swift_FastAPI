@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, status, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
 from .. import models, schemas, oauth2
-from ..database import engine, get_db
+from ..database import get_db
 
 router = APIRouter(
     prefix="/todos",
@@ -15,8 +15,10 @@ router = APIRouter(
     status_code=status.HTTP_200_OK,
     response_model=List[schemas.TodoResponse],
 )
-def get_all(db: Session = Depends(get_db)):
-    todos = db.query(models.Todo).all()
+def get_all(
+    db: Session = Depends(get_db), current_user: int = Depends(oauth2.get_current_user)
+):
+    todos = db.query(models.Todo).filter(models.Todo.user_id == current_user.id).all()
     if not todos:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="No todos found"
@@ -29,8 +31,16 @@ def get_all(db: Session = Depends(get_db)):
     status_code=status.HTTP_200_OK,
     response_model=schemas.TodoResponse,
 )
-def get_one(id: int, db: Session = Depends(get_db)):
-    todo = db.query(models.Todo).filter(models.Todo.id == id).first()
+def get_one(
+    id: int,
+    db: Session = Depends(get_db),
+    current_user: int = Depends(oauth2.get_current_user),
+):
+    todo = (
+        db.query(models.Todo)
+        .filter(models.Todo.id == id, models.Todo.user_id == current_user.id)
+        .first()
+    )
     if not todo:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail=f"Todo with id {id} not found"

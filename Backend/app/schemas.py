@@ -2,25 +2,7 @@ from pydantic import BaseModel, EmailStr
 from datetime import datetime
 
 
-class TodoBase(BaseModel):
-    title: str
-    done: bool = False
-    description: str | None = None
-
-
-class TodoCreate(TodoBase):
-    user_id: int
-
-
-class TodoResponse(TodoBase):
-    id: int
-    created_at: datetime
-    user_id: int
-
-    class config:
-        orm_mode = True
-
-
+####### --User schemas-- #######
 class UserBase(BaseModel):
     email: EmailStr
     password: str
@@ -41,6 +23,34 @@ class UserLogin(BaseModel):
     password: str
 
 
+####### --end of User schemas-- #######
+
+
+####### --Todo schemas-- #######
+class TodoBase(BaseModel):
+    title: str
+    done: bool = False
+    description: str | None = None
+
+
+class TodoCreate(TodoBase):
+    user_id: int
+
+
+class TodoResponse(TodoBase):
+    id: int
+    created_at: datetime
+    user_id: int
+    user: UserResponse
+
+    class config:
+        orm_mode = True
+
+
+####### --end of Todo schemas-- #######
+
+
+####### --Token schemas-- #######
 class Token(BaseModel):
     access_token: str
     token_type: str
@@ -48,3 +58,6 @@ class Token(BaseModel):
 
 class TokenData(BaseModel):
     id: int
+
+
+####### --end of Token schemas-- #######
