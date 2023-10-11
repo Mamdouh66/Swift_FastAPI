@@ -40,7 +40,7 @@ def get_one(id: int, db: Session = Depends(get_db)):
 
 @router.post(
     path="/",
-    response_model=schemas.TodoCreate,
+    response_model=schemas.TodoResponse,
     status_code=status.HTTP_201_CREATED,
 )
 def create_todo(
@@ -49,6 +49,7 @@ def create_todo(
     current_user: int = Depends(oauth2.get_current_user),
 ):
     new_todo = models.Todo(**request.model_dump())
+    new_todo.user_id = current_user.id
     db.add(new_todo)
     db.commit()
     db.refresh(new_todo)
@@ -64,11 +65,18 @@ def delete_todo(
     db: Session = Depends(get_db),
     current_user: int = Depends(oauth2.get_current_user),
 ):
-    todo = db.query(models.Todo).filter(models.Todo.id == id)
+    todo_query = db.query(models.Todo).filter(models.Todo.id == id)
+    todo = todo_query.first()
 
-    if todo.first() == None:
+    if todo == None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail=f"Todo with id {id} not found"
+        )
+
+    if todo.user_id != current_user.id:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="You are not authorized to delete this todo",
         )
 
     todo.delete(synchronize_session=False)
@@ -88,14 +96,21 @@ def update_todo(
     db: Session = Depends(get_db),
     current_user: int = Depends(oauth2.get_current_user),
 ):
-    new_todo = db.query(models.Todo).filter(models.Todo.id == id)
+    new_todo_query = db.query(models.Todo).filter(models.Todo.id == id)
+    new_todo = new_todo_query.first()
 
-    if new_todo.first() == None:
+    if new_todo == None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail=f"Todo with id {id} not found"
+        )
+
+    if new_todo.user_id != current_user.id:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="You are not authorized to delete this todo",
         )
 
     new_todo.update(request.model_dump())
     db.commit()
 
-    return new_todo.first()
+    return new_todo

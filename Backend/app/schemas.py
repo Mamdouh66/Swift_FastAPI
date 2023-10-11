@@ -9,12 +9,13 @@ class TodoBase(BaseModel):
 
 
 class TodoCreate(TodoBase):
-    pass
+    user_id: int
 
 
 class TodoResponse(TodoBase):
     id: int
     created_at: datetime
+    user_id: int
 
     class config:
         orm_mode = True

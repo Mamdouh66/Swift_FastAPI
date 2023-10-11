@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Boolean
+from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
 from sqlalchemy.sql.expression import text
 from sqlalchemy.sql.sqltypes import TIMESTAMP
 from .database import Base
@@ -9,14 +9,13 @@ class Todo(Base):
 
     id = Column(Integer, primary_key=True, nullable=False)
     title = Column(String, nullable=False)
-    description = Column(
-        String,
-        nullable=False,
-        server_default="",
-    )
+    description = Column(String, nullable=False, server_default="")
     done = Column(Boolean, server_default="FALSE", nullable=False)
     created_at = Column(
         TIMESTAMP(timezone=True), server_default=text("NOW()"), nullable=False
+    )
+    user_id = Column(
+        Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False
     )
 
 
