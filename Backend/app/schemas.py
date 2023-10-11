@@ -6,14 +6,14 @@ from datetime import datetime
 ####### --User schemas-- #######
 class UserBase(BaseModel):
     email: EmailStr
-    phone: PhoneNumber
+    phone_number: PhoneNumber
     password: str
 
 
 # NOTE don't return password
 class UserResponse(BaseModel):
     email: EmailStr
-    phone: PhoneNumber
+    phone_number: PhoneNumber
     id: int
     created_at: datetime
 

@@ -5,7 +5,6 @@ from .routers import todo, user, auth
 
 from . import models
 
-models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
